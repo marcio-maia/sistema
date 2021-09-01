@@ -9,23 +9,23 @@
 
   <!-- List of Text Items -->
 <ion-list>
-  <ion-item-sliding>
+  <ion-item-sliding *ngFor="let filme of listaVideos">
     <ion-item lines="full">
 
       <ion-thumbnail slot="start">
-        <img src="https://www.themoviedb.org/t/p/w300_and_h450_bestv2/nJ8V8eOLWEKnZjvRZkyI8BRMKDf.jpg">
+        <img [src]="filme.cartaz">
       </ion-thumbnail>
 
       <ion-label class="ion-text-wrap">
         <div>
-          <h1>Lobo Guerreiro 2 (2017)</h1>
-          <p>27/07/2017 (CN) - 2h 4m</p>
-          <p>Guerra, Ação, Drama</p>
+          <h1>{{filme.nome}}</h1>
+          <p>{{filme. lancameto}} - {{filme.duracao}}</p>
+          <ion-badge color="light" *ngFor="let genero of filme.generos" >{{genero}}</ion-badge>
         </div>
       </ion-label>
 
       <ion-chip>
-        <ion-label color=success outline>76%</ion-label>
+        <ion-label color=success outline>{{filme.classificacao}}%</ion-label>
       </ion-chip>
 
     </ion-item>
@@ -36,32 +36,7 @@
     </ion-item-options>
   </ion-item-sliding>
 
-  <ion-item-sliding>
-    <ion-item lines="full">
- 
-      <ion-thumbnail slot="start">
-        <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/2gL5KB4GV51O6rH9HTeDGeTy0XX.jpg">
-      </ion-thumbnail>
-
-      <ion-label class="ion-text-wrap">
-        <div>
-          <h1>Pagando Bem, Que Mal Tem? (2008)</h1>
-          <p>18/09/2008 (BR)- 1h 42m</p>
-          <p>Comédia</p>
-        </div>
-      </ion-label>
-
-      <ion-chip>
-        <ion-label color=success outline>76%</ion-label>
-      </ion-chip>
-
-    </ion-item>
-    <ion-item-options side="end">
-      <ion-item-option color="orange" (click)=" exibirAlertaFavorito()">
-        <ion-icon slot="icon-only" name="star"></ion-icon>
-      </ion-item-option>
-    </ion-item-options>
-  </ion-item-sliding>
+  
 
 </ion-list>
 
