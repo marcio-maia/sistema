@@ -1,3 +1,5 @@
+import { IListaFilmes } from './../models/filme.apimodel';
+import { FilmeService } from './../services/filme.service';
 import { DadosService } from './../services/dados.service';
 import { IFilme } from '../models/filme.models';
 import { Component } from '@angular/core';
@@ -12,7 +14,8 @@ import { Router } from '@angular/router';
 })
 export class Tab1Page {
 
-  titulo = 'Videos App';
+  titulo = 'Filmes';
+
   listaVideos: IFilme[] =  [
     {
       nome:'Lobo Guerreiro 2 (2017)',
@@ -37,11 +40,25 @@ export class Tab1Page {
 
   ];
 
+  listaFilmes: IListaFilmes;
+
   constructor(
     public alertController: AlertController,
     public toastController: ToastController,
     public dadosService: DadosService,
+    public filmeService: FilmeService,
     public route: Router) {}
+
+    buscarFilmes(evento: any){
+      console.log(evento.target.value);
+      const busca = evento.target.value;
+      if(busca && busca.trim() !== ''){
+          this.filmeService.buscarFilmes(busca).subscribe(dados=>{
+              console.log(dados);
+              this.listaFilmes = dados;
+          });
+      }
+    }
 
     exibirFilme(filme: IFilme){
       this.dadosService.guradarDados('filme', filme);
